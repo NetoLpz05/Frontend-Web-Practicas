@@ -23,3 +23,14 @@ El Service quedaba acoplado a una implementación específica y no se podría ej
 
 Si cambiaran el Map en memoria por una base de datos real, ¿cuántos archivos tocarían? ¿Por qué tan pocos?
 Se cambiarían dos archivos, el de infraestructura donde implementaríamos el repo conectado a la BDD y el main para preparar la instancia a la BDD
+
+Práctica 4:
+1. Express manda los rechazos de un handler async directo al middleware de errores, sin try/catch en cada ruta. ¿Qué tendrían que agregar en cada ruta si esto no fuera así?
+un try catch con un next(error)
+
+¿Por qué el servicio no lanza directamente un 409 en vez de EjemplarPrestadoError?
+El servicio del prestamo no lanza porque pertenece a negocio
+
+Si mañana agregaran una app móvil que también consume esta API, ¿qué archivos de esta práctica tendrían que tocar?
+no se tendría que cambiar nada, si se toman las mismas rutas, si cambiara el contrato se tendría que cambiar el prestamo.dto, validar y el servidor
+
