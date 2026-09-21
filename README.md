@@ -25,7 +25,7 @@ Si cambiaran el Map en memoria por una base de datos real, ¿cuántos archivos t
 Se cambiarían dos archivos, el de infraestructura donde implementaríamos el repo conectado a la BDD y el main para preparar la instancia a la BDD
 
 Práctica 4:
-1. Express manda los rechazos de un handler async directo al middleware de errores, sin try/catch en cada ruta. ¿Qué tendrían que agregar en cada ruta si esto no fuera así?
+Express manda los rechazos de un handler async directo al middleware de errores, sin try/catch en cada ruta. ¿Qué tendrían que agregar en cada ruta si esto no fuera así?
 un try catch con un next(error)
 
 ¿Por qué el servicio no lanza directamente un 409 en vez de EjemplarPrestadoError?
@@ -34,3 +34,18 @@ El servicio del prestamo no lanza porque pertenece a negocio
 Si mañana agregaran una app móvil que también consume esta API, ¿qué archivos de esta práctica tendrían que tocar?
 no se tendría que cambiar nada, si se toman las mismas rutas, si cambiara el contrato se tendría que cambiar el prestamo.dto, validar y el servidor
 
+Práctica 5:
+Que pasa al hacer npm run start:dev por primera vez?
+Aparece un html vacío solo con un Hello World en el
+
+Que hace el app.service que ya viene generado?
+Se manda una petición GET que regresa el string de Hello World!
+
+¿Por qué la ruta funciona sin declarar nada en app.module.ts?
+Porque primero registra AppController y luego detecta automaticamente lo que tiene dentro, por eso funciona
+
+Que pasaría si el cuerpo de la petición viniera vacío?
+La respuesta sería vacía y se enviaría un error 400
+
+En que archivo vive hoy toda la lógica de la practica?
+Vive en app.controller.ts
