@@ -49,3 +49,22 @@ La respuesta sería vacía y se enviaría un error 400
 
 En que archivo vive hoy toda la lógica de la practica?
 Vive en app.controller.ts
+
+Práctica 6:
+¿Qué pasa si el módulo no queda registrado en la raíz?
+Nest no lo incorpora al árbol de módulos de la aplicación, sus controladores y proveedores no se inicializan, así que sus rutas no quedan disponibles y el servicio no puede inyectarse
+
+¿Por qué los métodos del repositorio devuelven promesas si los datos están en memoria?
+Para mantener un contrato que también funcione con una base de datos, donde las operaciones son asíncronas
+
+¿Qué error aparece al cambiar a la interfaz, y por qué la clase sí se resolvía sola?
+Nest no puede resolver la dependencia del repositorio porque una interfaz de TypeScript desaparece al compilarse a JavaScript, con emitDecoratorMetadata, suele aparecer como Object y el error indica que no puede resolver esa dependencia del servicio
+
+¿Por qué el servicio necesita un token para el repositorio, pero el controlador no para el servicio?
+El tipo del repositorio es una interfaz, que no sirve como token en tiempo de ejecución; por eso se usa INSCRIPCION_REPOSITORY
+
+¿Cuál es la diferencia entre 400 y 409?
+400 indica que la petición está mal formada o le faltan campos obligatorios. 409 indica que la petición es válida, pero choca con una regla o con el estado actual
+
+¿Por qué cambió el estado de la última petición?
+La petición de inscripción había dado 409 porque no quedaba cupo, al cancelar otra inscripción, su estado pasa a cancelada y deja de contar entre las confirmadas, al reenviar la petición, ya hay lugar y responde 201
