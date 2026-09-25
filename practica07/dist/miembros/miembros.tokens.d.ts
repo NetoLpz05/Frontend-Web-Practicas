@@ -1,0 +1,1 @@
+export declare const MIEMBRO_REPOSITORY = "MIEMBRO_REPOSITORY";
