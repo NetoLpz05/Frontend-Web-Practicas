@@ -68,3 +68,19 @@ El tipo del repositorio es una interfaz, que no sirve como token en tiempo de ej
 
 ¿Por qué cambió el estado de la última petición?
 La petición de inscripción había dado 409 porque no quedaba cupo, al cancelar otra inscripción, su estado pasa a cancelada y deja de contar entre las confirmadas, al reenviar la petición, ya hay lugar y responde 201
+
+Practica 7:
+¿Por qué la interfaz no menciona Express, NestJS ni memoria?
+Porque solo define el contrato del repositorio: qué operaciones ofrece y qué datos reciben o devuelven.
+
+¿Qué palabra de la clase promete cumplir esa interfaz?
+implements, en MiembroMemoriaRepository implements MiembroRepository
+
+¿Por qué el repositorio no sabe qué es una petición HTTP?
+Porque su responsabilidad es consultar y modificar miembros, no gestionar rutas, códigos de estado ni solicitudes
+
+¿Por qué el controlador inyecta el Service sin token y el repositorio sí necesita uno?
+MiembrosService es una clase concreta disponible en tiempo de ejecución, así que Nest puede usarla directamente como token. MiembroRepository es una interfaz de TypeScript y desaparece al compilar; por eso se usa MIEMBRO_REPOSITORY como token explícito
+
+¿Qué prueba que Miembros no rompió Inscripciones?
+En ejecución, Inscripciones siguió devolviendo 201 para las primeras altas, 409 para cupo lleno y duplicidad, 200 al cancelar y 201 al reintentar tras la cancelación
