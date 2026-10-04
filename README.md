@@ -84,3 +84,19 @@ MiembrosService es una clase concreta disponible en tiempo de ejecución, así q
 
 ¿Qué prueba que Miembros no rompió Inscripciones?
 En ejecución, Inscripciones siguió devolviendo 201 para las primeras altas, 409 para cupo lleno y duplicidad, 200 al cancelar y 201 al reintentar tras la cancelación
+
+Práctica 8:
+¿Por qué el adaptador se llama adapter-mariadb si usamos MySQL?
+Porque el adaptador usa el controlador Node.js de MariaDB, que es compatible con la conexión de MySQL
+
+¿Editar schema.prisma cambió la base antes de migrar?
+No, al editar el archivo solo cambia la definición del esquema en el proyecto, la base cambia cuando aplicas esos cambios
+
+¿La carpeta de migraciones es una foto del esquema o un historial?
+Es un historial, guarda los cambios incrementales en el orden en que se generaron
+
+¿Por qué Horario.clase sí crea columna y Clase.horarios no?
+Horario.clase está asociada al campo escalar claseId, que guarda el identificador de la clase y es la clave foránea, Clase.horarios representa el lado inverso de la relación
+
+¿De dónde sale la relación muchos a muchos entre Miembro y Horario?
+No hay una relación M:M Inscripcion funciona como entidad intermedia: cada inscripción conecta un miembro con un horario
