@@ -1,25 +1,29 @@
-// Ningun error de aqui menciona un codigo HTTP. Eso lo decide el
-// Controller: el dominio solo reporta que paso.
+export abstract class ErrorDominio extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = new.target.name;
+  }
+}
 
-export class HorarioNoEncontradoError extends Error {
+export class HorarioNoEncontradoError extends ErrorDominio {
   constructor(horarioId: number) {
     super(`No existe el horario ${horarioId}`);
   }
 }
 
-export class MiembroNoEncontradoError extends Error {
+export class MiembroNoEncontradoError extends ErrorDominio {
   constructor(miembroId: number) {
     super(`No existe el miembro ${miembroId}`);
   }
 }
 
-export class CupoLlenoError extends Error {
+export class CupoLlenoError extends ErrorDominio {
   constructor(horarioId: number, cupoMaximo: number) {
     super(`El horario ${horarioId} ya tiene ${cupoMaximo} inscripciones confirmadas`);
   }
 }
 
-export class InscripcionDuplicadaError extends Error {
+export class InscripcionDuplicadaError extends ErrorDominio {
   constructor(horarioId: number, miembroId: number) {
     super(`El miembro ${miembroId} ya esta inscrito en el horario ${horarioId}`);
   }

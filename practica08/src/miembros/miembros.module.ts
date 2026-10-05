@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MiembroMemoriaRepository } from './infra/miembro-memoria.repository';
+import { MiembroPrismaRepository } from './infra/miembro-prisma.repository';
 import { MiembrosController } from './miembros.controller';
 import { MiembrosService } from './miembros.service';
 import { MIEMBRO_REPOSITORY } from './miembros.tokens';
@@ -10,8 +10,9 @@ import { MIEMBRO_REPOSITORY } from './miembros.tokens';
     MiembrosService,
     {
       provide: MIEMBRO_REPOSITORY,
-      useClass: MiembroMemoriaRepository,
+      useClass: MiembroPrismaRepository,
     },
   ],
+  exports: [MIEMBRO_REPOSITORY],
 })
 export class MiembrosModule {}

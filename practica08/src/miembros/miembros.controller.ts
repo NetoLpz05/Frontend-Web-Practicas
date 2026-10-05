@@ -9,8 +9,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import type { ActualizarMiembroDto } from './dto/actualizar-miembro.dto';
-import type { CrearMiembroDto } from './dto/crear-miembro.dto';
+import { ActualizarMiembroDto } from './dto/actualizar-miembro.dto';
+import { CrearMiembroDto } from './dto/crear-miembro.dto';
 import { MiembrosService } from './miembros.service';
 
 @Controller('miembros')

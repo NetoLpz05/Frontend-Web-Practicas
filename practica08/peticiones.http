@@ -2,12 +2,14 @@
 ###
 ### COMO SE USA:
 ###   1. Extension "REST Client" (humao.rest-client) en VS Code.
-###   2. npm run start:dev
-###   3. Clic en "Send Request" arriba de cada peticion.
+###   2. npm run db:seed
+###   3. npm run start:dev
+###   4. Clic en "Send Request" arriba de cada peticion.
 ###
-### OJO: el orden importa. El horario 1 tiene cupoMaximo = 2, asi que las
-### peticiones 1, 2 y 3 hay que correrlas EN ORDEN para ver el 409.
-### Todo vive en memoria: si reinicias el servidor, vuelve a cero.
+### OJO: los datos persisten en MySQL. Para reiniciar solo las inscripciones
+### demo antes de repetir el flujo, ejecuta en PowerShell:
+### $env:RESET_DEMO_DATA='1'; npm run db:seed; Remove-Item Env:RESET_DEMO_DATA
+### El horario 1 tiene cupoMaximo = 2; las peticiones 1, 2 y 3 van en orden.
 
 @host = http://localhost:3000
 
@@ -53,22 +55,33 @@ Content-Type: application/json
 { "horarioId": 3, "miembroId": 99 }
 
 
-### 7. Cuerpo mal formado  ->  400, NO 409
+### 7. Tipo incorrecto  ->  400 con statusCode, timestamp, path y message
 POST {{host}}/inscripciones
 Content-Type: application/json
 
-{ "horarioId": "hola" }
+{ "horarioId": "hola", "miembroId": 1 }
 
 
-### 8. Listar todas  ->  200
+### 8. Campo que no pertenece al DTO  ->  400
+POST {{host}}/inscripciones
+Content-Type: application/json
+
+{ "horarioId": 1, "miembroId": 3, "extra": true }
+
+
+### 9. Listar todas  ->  200
 GET {{host}}/inscripciones
 
 
-### 9. Cancelar la primera  ->  200 con estado "cancelada"
+### 10. Buscar la primera  ->  200
+GET {{host}}/inscripciones/1
+
+
+### 11. Cancelar la primera  ->  200 con estado "cancelada"
 DELETE {{host}}/inscripciones/1
 
 
-### 10. EL REMATE DE LA CLASE  ->  201
+### 12. EL REMATE DE LA CLASE  ->  201
 ###     Es la MISMA peticion de la #3, que dio 409.
 ###     Ahora da 201 porque la cancelacion libero el lugar.
 POST {{host}}/inscripciones
@@ -77,7 +90,7 @@ Content-Type: application/json
 { "horarioId": 1, "miembroId": 3 }
 
 
-### 11. Las clases de la Practica 5 siguen funcionando  ->  200
+### 13. Las clases de la Practica 5 siguen funcionando  ->  200
 GET {{host}}/clases
 
 
@@ -99,12 +112,13 @@ Content-Type: application/json
 { "nombre": "Diego Ruiz", "correo": "diego@itson.mx", "membresia": "plus" }
 
 
-### 4. Actualizar miembro 4  ->  200
-PATCH {{host}}/miembros/5
+### 4. Actualizar el id devuelto arriba  ->  200
+###    Sustituye {{memberId}} por el id que respondio el POST.
+PATCH {{host}}/miembros/{{memberId}}
 Content-Type: application/json
 
 { "correo": "diego.ruiz@itson.mx", "activo": false }
 
 
-### 5. Eliminar miembro 4  ->  200
-DELETE {{host}}/miembros/5
+### 5. Eliminar ese mismo miembro  ->  200
+DELETE {{host}}/miembros/{{memberId}}

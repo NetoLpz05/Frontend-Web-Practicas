@@ -1,5 +1,13 @@
-export interface CrearMiembroDto {
-  nombre: string;
-  correo: string;
-  membresia: string;
+import { IsEmail, IsIn, IsNotEmpty, IsString } from 'class-validator';
+
+export class CrearMiembroDto {
+  @IsString()
+  @IsNotEmpty()
+  nombre!: string;
+
+  @IsEmail()
+  correo!: string;
+
+  @IsIn(['premium', 'plus', 'basica'])
+  membresia!: string;
 }

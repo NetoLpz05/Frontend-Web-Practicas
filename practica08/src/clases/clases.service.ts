@@ -1,26 +1,21 @@
-import { Injectable } from '@nestjs/common';
-
-export interface Clase {
-    id: number;
-    nombre: string;
-}
-
-const clases: Clase[] = [
-    {id: 1, nombre: 'Yoga'},
-    {id: 2, nombre: 'Pilates'},
-    {id: 3, nombre: 'Spinning'},
-];
+import { Inject, Injectable } from '@nestjs/common';
+import type { ClaseRepository } from './dominio/clase.repository';
+import type { Clase } from './dominio/entidades';
+import { CLASE_REPOSITORY } from './clases.tokens';
 
 @Injectable()
 export class ClasesService {
-    listar(): Clase[]{
-        return clases;
+    constructor(
+        @Inject(CLASE_REPOSITORY)
+        private readonly repository: ClaseRepository,
+    ) {}
+
+    listar(): Promise<Clase[]> {
+        return this.repository.listar();
     }
 
-    crear(nombre: string): Clase {
-        const nueva: Clase = {id: clases.length + 1, nombre};
-        clases.push(nueva);
-        return nueva;
+    crear(nombre: string): Promise<Clase> {
+        return this.repository.crear(nombre);
     }
 }
 

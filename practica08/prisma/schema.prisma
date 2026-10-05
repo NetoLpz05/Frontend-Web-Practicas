@@ -39,6 +39,7 @@ model Miembro {
   id           Int           @id @default(autoincrement())
   nombre       String
   correo       String        @unique
+  membresia    String        @default("basica")
   activo       Boolean       @default(true)
   inscripcions Inscripcion[]
 

@@ -21,7 +21,7 @@ export interface Miembro {
   activo: boolean;
 }
 
-export type EstadoInscripcion = 'confirmada' | 'cancelada';
+export type EstadoInscripcion = 'confirmada' | 'lista_espera' | 'cancelada' | 'asistio';
 
 export interface Inscripcion {
   id: number;

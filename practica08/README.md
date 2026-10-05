@@ -23,38 +23,47 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+API de gimnasio con NestJS, Prisma 7 y MySQL. Clases, horarios, miembros e
+inscripciones se guardan en la base de datos.
 
 ## Project setup
 
-```bash
-$ npm install
-```
+1. Crea la base `gimnasio` en MySQL.
+2. Instala dependencias con `npm install`.
+3. Copia `.env.example` a `.env` y configura `DATABASE_URL` con tu usuario,
+  contrasena, host, puerto y base. No publiques `.env`.
+4. Aplica las migraciones y genera Prisma Client:
 
-## Compile and run the project
+  ```powershell
+  npx prisma migrate deploy
+  npx prisma generate
+  ```
 
-```bash
-# development
-$ npm run start
+5. Carga los registros de demostracion y arranca la API:
 
-# watch mode
-$ npm run start:dev
+  ```powershell
+  npm run db:seed
+  npm run start:dev
+  ```
 
-# production mode
-$ npm run start:prod
-```
+La API escucha en `http://localhost:3000`. Los origenes CORS permitidos son
+`http://localhost:5173` y `http://localhost:5500`.
+
+La evidencia de las cuatro tablas esta en `evidencias/`.
 
 ## Run tests
 
-```bash
-# unit tests
-$ npm run test
+Ejecuta unitarias y e2e con `npm test -- --runInBand` y
+`npm run test:e2e -- --runInBand`. Para probar las reglas HTTP en orden, usa
+`peticiones.http` con la extension REST Client.
 
-# e2e tests
-$ npm run test:e2e
+El seed actualiza los datos de demostracion sin borrar inscripciones. Para
+limpiar las inscripciones antes de repetir el escenario, en PowerShell:
 
-# test coverage
-$ npm run test:cov
+```powershell
+$env:RESET_DEMO_DATA='1'
+npm run db:seed
+Remove-Item Env:RESET_DEMO_DATA
 ```
 
 ## Deployment
