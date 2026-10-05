@@ -61,12 +61,18 @@ Content-Type: application/json
 
 { "horarioId": "hola", "miembroId": 1 }
 
+### Respuesta: statusCode 400, path "/inscripciones", timestamp ISO y
+### message con los errores de validacion del campo horarioId.
+
 
 ### 8. Campo que no pertenece al DTO  ->  400
 POST {{host}}/inscripciones
 Content-Type: application/json
 
 { "horarioId": 1, "miembroId": 3, "extra": true }
+
+### Respuesta: statusCode 400, path "/inscripciones", timestamp ISO y
+### message indicando que la propiedad extra no esta permitida.
 
 
 ### 9. Listar todas  ->  200
@@ -122,3 +128,14 @@ Content-Type: application/json
 
 ### 5. Eliminar ese mismo miembro  ->  200
 DELETE {{host}}/miembros/{{memberId}}
+
+
+### CORS A. Misma solicitud con el origen de Vite
+GET {{host}}/clases
+Origin: http://localhost:5173
+
+
+### CORS B. Misma solicitud con Live Server
+### Compara Access-Control-Allow-Origin y Access-Control-Expose-Headers.
+GET {{host}}/clases
+Origin: http://localhost:5500
