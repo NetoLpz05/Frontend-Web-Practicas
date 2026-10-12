@@ -135,3 +135,6 @@ Porque si alguien olvida configurar una ruta, con el esquema seguro por defecto 
 
 ¿Cuántas líneas de AuthService tuvieron que cambiar para pasar de memoria a MySQL? ¿Por qué?
 Cero. AuthService depende del contrato UsuarioRepository, no directamente del almacenamiento
+
+Practica 11:
+El nombre de una etiqueta personalizada debe llevar un guion para que el navegador pueda distinguirla de las etiquetas HTML estándar
