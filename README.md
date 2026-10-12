@@ -100,3 +100,38 @@ Horario.clase está asociada al campo escalar claseId, que guarda el identificad
 
 ¿De dónde sale la relación muchos a muchos entre Miembro y Horario?
 No hay una relación M:M Inscripcion funciona como entidad intermedia: cada inscripción conecta un miembro con un horario
+
+Práctica 10:
+¿Por qué el filtro atrapa la clase base y no cada error por separado?
+Porque los cuatro errores de dominio heredan de ErrorDeDominio. Al usar @Catch(ErrorDeDominio), el filtro captura cualquiera de esas clases hijas y centraliza su traducción a HTTP
+
+¿Por qué este middleware no podría decidir si un usuario tiene permiso para una ruta?
+Porque se ejecuta antes de que Nest resuelva el controlador y el método que atenderán la petición, en ese momento no tiene el contexto de ruta ni el usuario validado en req.user, para la autenticación y autorización se usa un Guard, este puede consultar los metadatos de la ruta y ejecutarse después de validar el token
+
+¿Por qué la petición que responde 409 no aparece en ese registro?
+Porque el LoggingInterceptor usa tap() para registrar cuando el controlador responde correctamente
+
+¿Por qué este cambio rompe a cualquier cliente que ya estuviera usando la API?
+Porque el SobreInterceptor cambia la forma de las respuestas exitosas: en vez de recibir directamente, por ejemplo, una lista, el cliente recibe { data, meta }
+
+Si el servidor respondió en los dos casos, ¿quién bloquea y a quién protege?
+El servidor responde a ambos requests, para un origen no permitido, omite Access-Control-Allow-Origin; entonces el navegador bloquea que el código JavaScript de esa página lea la respuesta, CORS protege al usuario del navegador frente a páginas de otros orígenes que intenten leer respuestas
+
+¿Por qué el campo se llama passwordHash y no password?
+Porque la base de datos debe guardar el hash derivado de la contraseña, no la contraseña original
+
+¿Por qué los dos errores del inicio de sesión dicen exactamente lo mismo?
+Para que alguien no pueda averiguar si una cuenta existe probando correos
+
+Si el contenido se puede leer, ¿qué es lo que protege la firma?
+Protege su integridad y autenticidad: permite verificar que el token fue firmado con el secreto del servidor y que su contenido no fue modificado
+
+¿Por qué es más seguro proteger todo y abrir a mano, que al revés?
+Porque si alguien olvida configurar una ruta, con el esquema seguro por defecto queda protegida y responde 401 hasta que se marque expresamente como pública
+
+¿Cuál es la diferencia entre un 401 y un 403?
+401 Unauthorized: falta una credencial válida; por ejemplo, no se envió token o el token no es válido
+403 Forbidden: la identidad sí fue autenticada, pero no tiene permiso para hacer esa acción
+
+¿Cuántas líneas de AuthService tuvieron que cambiar para pasar de memoria a MySQL? ¿Por qué?
+Cero. AuthService depende del contrato UsuarioRepository, no directamente del almacenamiento
