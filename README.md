@@ -138,3 +138,21 @@ Cero. AuthService depende del contrato UsuarioRepository, no directamente del al
 
 Practica 11:
 El nombre de una etiqueta personalizada debe llevar un guion para que el navegador pueda distinguirla de las etiquetas HTML estándar
+
+Practica 12:
+¿En qué se convirtió cada etiqueta del JSX?
+En llamadas de JavaScript que crean elementos de React. Por ejemplo, <h1> se convierte en una llamada que crea un elemento h1
+
+Si React es una biblioteca, ¿quién traduce el JSX?
+El compilador de la herramienta de desarrollo, Vite transforma el JSX antes de que el navegador lo ejecute.
+
+¿Qué hacen createRoot y render?
+createRoot prepara el contenedor de la página para React, render muestra los componentes dentro de ese contenedor
+
+¿Qué pasa si se omite la prop obligatoria nombre?
+TypeScript muestra un error porque falta una propiedad requerida
+
+¿Por qué el nombre de un componente empieza con mayúscula?
+Para que JSX lo distinga de una etiqueta HTML: <Saludo /> se reconoce como un componente; <saludo />, como una etiqueta HTML
+
+
