@@ -141,7 +141,7 @@ El nombre de una etiqueta personalizada debe llevar un guion para que el navegad
 
 Practica 12:
 ¿En qué se convirtió cada etiqueta del JSX?
-En llamadas de JavaScript que crean elementos de React. Por ejemplo, <h1> se convierte en una llamada que crea un elemento h1
+En llamadas de JavaScript que crean elementos de React. Por ejemplo, h1 se convierte en una llamada que crea un elemento h1
 
 Si React es una biblioteca, ¿quién traduce el JSX?
 El compilador de la herramienta de desarrollo, Vite transforma el JSX antes de que el navegador lo ejecute.
@@ -153,6 +153,16 @@ createRoot prepara el contenedor de la página para React, render muestra los co
 TypeScript muestra un error porque falta una propiedad requerida
 
 ¿Por qué el nombre de un componente empieza con mayúscula?
-Para que JSX lo distinga de una etiqueta HTML: <Saludo /> se reconoce como un componente; <saludo />, como una etiqueta HTML
+Para que JSX lo distinga de una etiqueta HTML: Saludo se reconoce como un componente; saludo, como una etiqueta HTML
+
+Práctica 13:
+¿Por qué el Layout no necesita saber que es una tienda?
+Porque es un componente genérico: recibe el encabezado, el pie y el contenido como elementos y solo define dónde colocarlos
+
+¿Qué pasa si escribes onClick={onAgregar(producto)} sin la flecha?
+La función se ejecuta inmediatamente durante el render, en vez de esperar al click
+
+¿Por qué con carrito.push(...) el contador no se mueve y no sale ningún error?
+Push modifica el arreglo existente, pero no se le avisa a React que debe volver a renderizar
 
 
