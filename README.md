@@ -165,4 +165,17 @@ La función se ejecuta inmediatamente durante el render, en vez de esperar al cl
 ¿Por qué con carrito.push(...) el contador no se mueve y no sale ningún error?
 Push modifica el arreglo existente, pero no se le avisa a React que debe volver a renderizar
 
+Practica 15:
+¿Por qué el 404 sí tiene encabezado y pie?
+Porque la ruta * está anidada dentro de la ruta que muestra Layout. El layout renderiza el encabezado y el pie, y su <Outlet /> muestra en medio la página 404.
 
+¿Qué cambia en la pestaña Red con a href en lugar de Link?
+
+Con Link, Router cambia de ruta sin volver a solicitar el documento HTML
+Con a href, el navegador hace una navegación completa y aparece una solicitud Documento a /clases/1; luego la página vuelve a cargar sus datos desde la API
+
+¿En qué tipo de dato llega el ID de la URL?
+useParams lo entrega como texto (string, o undefined si no existe)
+
+¿Qué pasa de /clases/1 a /clases/2 si el ID no está en las dependencias del efecto?
+El componente de detalle puede reutilizarse al cambiar de clase. Si el efecto no depende del ID, no vuelve a pedir los datos y puede quedarse mostrando la clase anterior
