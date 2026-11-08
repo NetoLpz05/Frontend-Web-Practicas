@@ -179,3 +179,13 @@ useParams lo entrega como texto (string, o undefined si no existe)
 
 ¿Qué pasa de /clases/1 a /clases/2 si el ID no está en las dependencias del efecto?
 El componente de detalle puede reutilizarse al cambiar de clase. Si el efecto no depende del ID, no vuelve a pedir los datos y puede quedarse mostrando la clase anterior
+
+Practica 16:
+¿Por qué usar un contexto en vez de props para la sesión? 
+El contexto permite que componentes distantes lean y actualicen la sesión sin pasar usuario, token y funciones por cada componente intermedio
+
+¿Qué pasa si se usa la sesión fuera del proveedor? 
+useSesion() lanza un error explicativo: debe usarse dentro de <ProveedorSesion>
+
+¿Dónde se guarda el token y qué riesgo tiene? 
+En localStorage, bajo la clave token, persiste al recargar la página, pero cualquier JavaScript que se ejecute en el mismo origen
