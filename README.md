@@ -187,7 +187,7 @@ El contexto permite que componentes distantes lean y actualicen la sesión sin p
 ¿Qué pasa si se usa la sesión fuera del proveedor? 
 useSesion() lanza un error explicativo: debe usarse dentro de <ProveedorSesion>
 
-Practica 18:
+Practica 17:
 ¿La ruta protegida hace segura la aplicación? ¿Qué protege realmente los datos?
 No por sí sola, la ruta protegida en el frontend evita que una persona sin sesión vea esa página, pero puede modificarse o saltarse
 
