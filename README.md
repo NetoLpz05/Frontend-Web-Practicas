@@ -200,3 +200,13 @@ Porque el backend debe identificar al miembro a partir del token de sesión, no 
 
 ¿Dónde se guarda el token y qué riesgo tiene? 
 En localStorage, bajo la clave token, persiste al recargar la página, pero cualquier JavaScript que se ejecute en el mismo origen
+
+Practica 18:
+¿Cuánto se ahorró y por qué es poco?
+En la ruta /clases, la descarga inicial de JavaScript pasó de 326,967 a 324,495 bytes: un ahorro de 2,472 bytes 
+
+¿Por qué falla la API si el preview corre en el puerto 4173?
+Porque vite preview sirve el frontend; no inicia el backend
+
+¿Cuándo conviene Context y cuándo un store?
+Context conviene para datos compartidos por muchos componentes que cambian poco, como la sesión y el usuario, un store conviene para estado compartido que cambia más seguido o tiene acciones propias
