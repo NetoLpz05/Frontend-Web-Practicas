@@ -187,5 +187,16 @@ El contexto permite que componentes distantes lean y actualicen la sesión sin p
 ¿Qué pasa si se usa la sesión fuera del proveedor? 
 useSesion() lanza un error explicativo: debe usarse dentro de <ProveedorSesion>
 
+Practica 18:
+¿La ruta protegida hace segura la aplicación? ¿Qué protege realmente los datos?
+No por sí sola, la ruta protegida en el frontend evita que una persona sin sesión vea esa página, pero puede modificarse o saltarse
+
+¿Por qué no se manda miembroId al inscribirse?
+Porque el backend debe identificar al miembro a partir del token de sesión, no confiar en un ID enviado por el navegador
+
+¿Qué diferencia hay entre un 401 y un 403?
+401 (No autorizado): falta una sesión válida, por ejemplo, porque no se envió un token o expiró
+403 (Prohibido): la sesión es válida, pero esa cuenta no tiene permiso para realizar la acción
+
 ¿Dónde se guarda el token y qué riesgo tiene? 
 En localStorage, bajo la clave token, persiste al recargar la página, pero cualquier JavaScript que se ejecute en el mismo origen
