@@ -210,3 +210,17 @@ Porque vite preview sirve el frontend; no inicia el backend
 
 ¿Cuándo conviene Context y cuándo un store?
 Context conviene para datos compartidos por muchos componentes que cambian poco, como la sesión y el usuario, un store conviene para estado compartido que cambia más seguido o tiene acciones propias
+
+Práctica 19:
+¿Qué archivo de Angular hace el papel de main.tsx, de App.tsx y de vite.config.ts?
+main.tsx -> src/main.ts: inicia la aplicación y monta el componente raíz
+App.tsx -> src/app/app.ts, junto con su plantilla app.html y estilos app.css. Angular separa la lógica de la vista
+vite.config.ts -> principalmente angular.json: configura compilación, ejecución, estilos y recursos. No es una equivalencia exacta; Angular CLI gestiona esa configuración
+
+¿Por qué clase() lleva pas y para qué sirve track?
+En tarjeta-clase.ts, clase se declara con input.required<Clase>()
+En @for (clase of clases; track clase.id), track clase.id identifica cada clase por su ID
+
+Provocar y capturar los errores NG5002 y NG8001
+NG5002: NG5002: Unclosed block "if" — ocurre al dejar sin cerrar un bloque de control
+NG8001: 'app-elemento-inexistente' is not a known element — ocurre al usar un elemento Angular que no está registrado/importado como componente
