@@ -224,3 +224,10 @@ En @for (clase of clases; track clase.id), track clase.id identifica cada clase 
 Provocar y capturar los errores NG5002 y NG8001
 NG5002: NG5002: Unclosed block "if" — ocurre al dejar sin cerrar un bloque de control
 NG8001: 'app-elemento-inexistente' is not a known element — ocurre al usar un elemento Angular que no está registrado/importado como componente
+
+Práctica 20:
+¿Qué diferencia hay entre un signal y un computed, y cuál se parece a useState y cuál a useMemo?
+signal() guarda un valor que puede cambiar y notifica a quienes lo leen, se parece a useState, computed() calcula un valor derivado de uno o más signals y lo actualiza cuando cambian sus dependencias; se parece a useMemo
+
+¿Qué pasa si el filtro hace new Catalogo() en lugar de inject(Catalogo)?
+Si el filtro hace new Catalogo() en vez de inject(Catalogo), crea otra instancia del servicio
