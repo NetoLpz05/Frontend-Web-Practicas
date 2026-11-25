@@ -231,3 +231,22 @@ signal() guarda un valor que puede cambiar y notifica a quienes lo leen, se pare
 
 ¿Qué pasa si el filtro hace new Catalogo() en lugar de inject(Catalogo)?
 Si el filtro hace new Catalogo() en vez de inject(Catalogo), crea otra instancia del servicio
+
+Práctica 21:
+Responder: ¿qué pieza de React Router corresponde a router-outlet, a routerLink y a routerLinkActive?
+router-outlet corresponde a Outlet, que muestra la página de la ruta activa. routerLink corresponde a Link to="...", que permite navegar, routerLinkSctive aplica una clase cuando la ruta está activa
+
+Responder: ¿por qué la ruta comodín (**) va al final y la ruta vacía necesita pathMatch: 'full'?
+La ruta ** coincide con cualquier URL que no haya coincidido antes, por eso va al final y null hace que la ruta vacía solo coincida cuando la URL está vacía
+
+Responder: ¿dónde vive el valor de un campo en un formulario reactivo y en qué se diferencia del useState de React?
+El valor vive en un FormControl, dentro de un FormGroup
+
+Responder: ¿qué regresa un validador propio cuando el valor es válido y cuando no, y cómo se relaciona con hasError?
+Cuando el valor es válido, devuelve null. Si no lo es, devuelve un objeto con la clave del error
+
+Responder: ¿qué cambió en el servicio del catálogo y por qué ningún componente se enteró?
+El servicio pasó de usar datos locales a obtenerlos de la API con httpResource (GET /clases)
+
+Responder: ¿por qué no hizo falta iniciar sesión para leer el catálogo?
+Porque el endpoint GET /clases está marcado como público con @Publico(), y el guard de autenticación permite el acceso a esos endpoints sin token
