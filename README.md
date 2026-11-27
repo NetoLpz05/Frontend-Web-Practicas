@@ -250,3 +250,31 @@ El servicio pasó de usar datos locales a obtenerlos de la API con httpResource 
 
 Responder: ¿por qué no hizo falta iniciar sesión para leer el catálogo?
 Porque el endpoint GET /clases está marcado como público con @Publico(), y el guard de autenticación permite el acceso a esos endpoints sin token
+
+Practica 22:
+Si el formulario ya valida, ¿por qué también valida el servidor? 
+La validación del formulario ayuda a la persona a corregir errores antes de enviar los datos, pero no es una frontera de seguridad, una petición puede enviarse sin usar la interfaz o modificarse desde el navegador
+
+¿Por qué httpResource para leer y HttpClient para crear, editar y eliminar? 
+httpResource encaja con las lecturas: mantiene el estado de carga, error y respuesta de forma reactiva, y permite recargar el catálogo
+
+¿Qué pasa si se olvida el subscribe()? 
+Los observables de HttpClient son fríos, la petición no se ejecuta hasta que alguien se suscribe, si no hay subscribe() ni otro consumidor, como firstValueFrom, la petición no se envía
+
+¿A qué pieza de React corresponden las rutas hijas (children), el interceptor y el guardia?
+Las rutas hijas corresponden a rutas anidadas de React Router, que se muestran en un Outlet, el interceptor se parece a los interceptores de Axios o a una capa común alrededor de fetch: puede modificar peticiones y reaccionar a respuestas, el guardia cumple una función similar a proteger una ruta en React Router y redirigir si no hay sesión válida
+
+¿Cuándo se ejecuta el guardia y por qué salir() tiene que navegar al login? 
+El guardia se ejecuta durante la navegación, antes de activar la ruta protegida; el guardia de rutas hijas se vuelve a evaluar al navegar entre ellas. salir() borra la sesión, pero eso por sí solo no cambia la ruta que ya está abierta
+
+¿Cómo decide un mismo formulario, con dos rutas, si manda POST o PATCH?
+La ruta de edición proporciona el id como input del componente; la ruta de creación no lo proporciona, al guardar, si hay id se llama a actualizar con PATCH; si no, se crea con POST
+
+¿Por qué el estado del formulario no se puede observar con un computed()?
+computed() reacciona a signals, pero el estado de FormGroup —por ejemplo dirty, valid o los valores— no es una signal, se puede consultar directamente o convertir sus observables, como valueChanges o statusChanges
+
+¿Qué diferencia hay entre canActivate y canDeactivate, y qué casos no cubre la guarda de salida? 
+canActivate decide si se puede entrar a una ruta; canDeactivate decide si se puede salir del componente activo, por ejemplo, para confirmar que no se descarten cambios sin guardar
+
+Opcional: ¿por qué la ruta de crear va antes que la del id?
+No se implementó una página de detalle /clases/:id en esta entrega. Si se agrega una ruta genérica como /clases/:id, la ruta literal /clases/nueva debe declararse antes: Angular evalúa las rutas en orden y nueva podría interpretarse como el valor del parámetro id
