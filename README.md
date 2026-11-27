@@ -278,3 +278,13 @@ canActivate decide si se puede entrar a una ruta; canDeactivate decide si se pue
 
 Opcional: ¿por qué la ruta de crear va antes que la del id?
 No se implementó una página de detalle /clases/:id en esta entrega. Si se agrega una ruta genérica como /clases/:id, la ruta literal /clases/nueva debe declararse antes: Angular evalúa las rutas en orden y nueva podría interpretarse como el valor del parámetro id
+
+Practica 23:
+¿Qué diferencia hay entre un signal y un Observable?
+Un signal contiene un valor actual que se lee directamente y permite que Angular actualice lo que depende de él cuando cambia, un Observable representa una secuencia de valores o eventos a lo largo del tiempo; se consume mediante una suscripción y permite transformar esa secuencia con operadores de RxJS
+
+¿Qué problema evita switchMap y qué pasaría con mergeMap?
+switchMap cancela la búsqueda anterior cuando llega un término nuevo, evitando que una respuesta vieja reemplace los resultados de la búsqueda actual, mergeMap mantendría todas las peticiones activas; si responden fuera de orden, una búsqueda antigua podría mostrar resultados que ya no corresponden
+
+¿Qué pasa si se quita catchError y la API se apaga?
+El error HTTP terminaría el stream de búsqueda, las búsquedas siguientes ya no se ejecutarían y, al leer el signal generado con toSignal, el error podría propagarse a la interfaz, catchError convierte el fallo en un estado visible y permite que el stream siga aceptando búsquedas nuevas
